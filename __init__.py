@@ -5,7 +5,7 @@ from opsdroid.skill import Skill
 
 class TagInfo(Skill):
 	# match the user input, it can be anywhere, without .* it would have to be at the start of the message which wouldn't work for my matrix-xmpp bridge
-	@match_regex(r'.*&tg (?P<input>.*)', case_sensitive=False)
+	@match_regex(r'.*?&tg (?P<input>.*)', case_sensitive=False)
 	async def hello(self, message):
 		# get user input
 		input_text = message.regex.group('input')
@@ -34,4 +34,4 @@ class TagInfo(Skill):
 
 		except:
 			# if parsing of user params fails give usage info
-			await message.respond("Usage: &tg key value")
+			await message.respond("<pre>Usage: &tg key value</pre>")
