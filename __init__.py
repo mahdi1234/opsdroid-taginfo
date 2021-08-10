@@ -19,7 +19,7 @@ class TagInfo(Skill):
 				data = json.loads(url.read().decode())
 				# and feed it to text string, otherwise there's problem with mixing types
 				for element in data['data']:
-					text += (element['type'] + " -- " + str(element['count']) + "\n")
+					text += (element['type'] + " --> " + str(element['count']) + "\n")
 
 			text += "\n### and most common tag combinations ###\n\n"
 			# here we go with another taginofo query
@@ -27,7 +27,7 @@ class TagInfo(Skill):
 				data = json.loads(url.read().decode())
 				for element in data['data']:
 					# taginfo API returns empty string instead of * on website, so I had to convert it back to * and str.replace() doesn't behave as I expected thus used .re
-					text += (element['other_key'] + ":" + re.sub('^$', '*', element['other_value']) + " -- " + str(element['together_count']) + "\n")
+					text += (element['other_key'] + ":" + re.sub('^$', '*', element['other_value']) + " --> " + str(element['together_count']) + "\n")
 				# return everything at once as answer to chat
 				text += "</pre>"
 				await message.respond(text)
