@@ -46,6 +46,6 @@ class TagInfo(Skill):
 
 		except:
 			# if parsing of user params fails give usage info
-			await message.respond("<pre>Usage: &tg key value</pre>")
+			await message.respond("<pre>Usage: &tg key=value\ne.g. highway=steps or highway=*</pre>")
 
 # https://taginfo.openstreetmap.org/api/4/search/by_value?query=supermarket&sortname=count_all&sortorder=desc&page=1&rp=10&format=json_pretty
