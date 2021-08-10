@@ -28,7 +28,7 @@ A skill for [opsdroid](https://github.com/opsdroid/opsdroid) to get https://tagi
 >           source:survey --> 1049
 >           surface:paving_stones --> 1006
 
-> user: you check check steps like this &tg highway=*
+> user: or all highway values &tg highway=*
 
 > opsdroid: 
 >
