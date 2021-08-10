@@ -5,7 +5,8 @@ A skill for [opsdroid](https://github.com/opsdroid/opsdroid) to get https://tagi
 
 ## Usage
 
-#### `&tg highway steps`
+#### `&tg highway=steps`
+#### `&tg highway=*`
 
 
 > user: you check check steps like this &tg highway=steps
