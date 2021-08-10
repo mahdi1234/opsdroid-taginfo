@@ -1,6 +1,6 @@
 # opsdroid skill taginfo
 
-A skill for [opsdroid](https://github.com/opsdroid/opsdroid) to get taginfo data.
+A skill for [opsdroid](https://github.com/opsdroid/opsdroid) to get https://taginfo.openstreetmap.org/ data.
 
 
 ## Usage
