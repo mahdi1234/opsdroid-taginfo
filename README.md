@@ -8,7 +8,7 @@ A skill for [opsdroid](https://github.com/opsdroid/opsdroid) to get https://tagi
 #### `&tg highway steps`
 
 
-> user: you check check steps like this &tg highway steps
+> user: you check check steps like this &tg highway=steps
 
 > opsdroid: 
 >
@@ -28,3 +28,18 @@ A skill for [opsdroid](https://github.com/opsdroid/opsdroid) to get https://tagi
 >           source:survey --> 1049
 >           surface:paving_stones --> 1006
 
+> user: you check check steps like this &tg highway=*
+
+> opsdroid: 
+>
+>           ### Occurence of highway=* ###
+>           track --> 328399
+>           residential --> 242353
+>           footway --> 225501
+>           service --> 223741
+>           path --> 118836
+>           tertiary --> 73005
+>           crossing --> 46817
+>           secondary --> 40849
+>           bus_stop --> 40490
+>           unclassified --> 25996
