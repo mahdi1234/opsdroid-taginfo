@@ -5,11 +5,11 @@ A skill for [opsdroid](https://github.com/opsdroid/opsdroid) to get https://tagi
 
 ## Usage
 
-#### `&tg highway=steps`
-#### `&tg highway=*`
+#### `!tg highway=steps`
+#### `!tg highway=*`
 
 
-> user: you check check steps like this &tg highway=steps
+> user: you check check steps like this !tg highway=steps
 
 > opsdroid: 
 >
@@ -29,7 +29,7 @@ A skill for [opsdroid](https://github.com/opsdroid/opsdroid) to get https://tagi
 >           source:survey --> 1049
 >           surface:paving_stones --> 1006
 
-> user: or all highway values &tg highway=*
+> user: or all highway values !tg highway=*
 
 > opsdroid: 
 >
