@@ -9,7 +9,6 @@ class TagInfo(Skill):
 	async def hello(self, message):
 		# get user input
 		input_text = message.regex.group('input')
-		await message.respond(input_text)
 		try: 
 
 			if re.search(r'^help$', input_text):
