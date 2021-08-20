@@ -7,7 +7,7 @@ A skill for [opsdroid](https://github.com/opsdroid/opsdroid) to get openstreetma
 
 #### `!tg highway=steps`
 #### `!tg highway=*`
-
+#### `!tg school`
 
 > user: you check check steps like this !tg highway=steps
 
@@ -44,3 +44,18 @@ A skill for [opsdroid](https://github.com/opsdroid/opsdroid) to get openstreetma
 >           secondary --> 40849
 >           bus_stop --> 40490
 >           unclassified --> 25996
+
+
+> user: !tg school
+
+>           ### Occurence of value school ###
+>           amenity = school - 4232
+>           building = school - 2890
+>           amenity = driving_school - 63
+>           building:part = school - 52
+>           amenity = music_school - 28
+>           operator:type = school - 18
+>           amenity = language_school - 15
+>           amenity = ski_school - 13
+>           abandoned:amenity = school - 7
+>           animal = school - 6
