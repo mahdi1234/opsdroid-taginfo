@@ -12,14 +12,14 @@ class TagInfo(Skill):
 		await message.respond(input_text)
 		try: 
 
-			if re.search(r'^help$', input_text):     # any words end with ing?
+			if re.search(r'^help$', input_text):
 				await message.respond("<pre>Usage: '!tg key=value' or 'value'\ne.g. '!tg highway=steps' or '!tg highway=*' or 'steps'</pre>")
 
-			elif re.search(r' ', input_text):     # any words end with ing?
+			elif re.search(r' ', input_text):
 				await message.respond("<pre>Usage: '!tg key=value' or 'value'\ne.g. '!tg highway=steps' or '!tg highway=*' or 'steps'</pre>")
 
 			# when querying wildcard like highway=*
-			elif re.search(r'^[a-zA-Z:_]+=\*$', input_text):     # any words end with ing?
+			elif re.search(r'^[a-zA-Z:_]+=\*$', input_text):
 				osm_key,osm_value=input_text.split('=')
 				text = "<pre>\n### Occurence of " + osm_key + "=" + osm_value + " ###\n\n"
 				# get results via taginfo API
@@ -33,7 +33,7 @@ class TagInfo(Skill):
 					await message.respond(text)
 
 			# when querying wildcard like highway=steps
-			elif re.search(r'^[a-zA-Z:_]+=[a-zA-Z:_]+$', input_text):     # any words end with ing?
+			elif re.search(r'^[a-zA-Z:_]+=[a-zA-Z:_]+$', input_text):
 				osm_key,osm_value=input_text.split('=')
 				text = "<pre>\n### Occurence of " + osm_key + "=" + osm_value + " ###\n\n"
 				# get results via taginfo API
@@ -55,7 +55,7 @@ class TagInfo(Skill):
 					await message.respond(text)
 
 			# when query singe word i.e. value
-			elif re.search(r'^[a-zA-Z:_]+$', input_text):     # any words end with ing?
+			elif re.search(r'^[a-zA-Z:_]+$', input_text):
 				osm_value=input_text
 				text = "<pre>\n### Occurence of value " + osm_value + " ###\n\n"
 				# get results via taginfo API
@@ -74,5 +74,3 @@ class TagInfo(Skill):
 		except:
 			# if parsing of user params fails give usage info
 				await message.respond("<pre>Usage: '!tg key=value' or 'value'\ne.g. '!tg highway=steps' or '!tg highway=*' or 'steps'</pre>")
-
-# https://taginfo.openstreetmap.org/api/4/search/by_value?query=supermarket&sortname=count_all&sortorder=desc&page=1&rp=10&format=json_pretty
