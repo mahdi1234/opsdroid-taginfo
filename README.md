@@ -48,6 +48,8 @@ A skill for [opsdroid](https://github.com/opsdroid/opsdroid) to get openstreetma
 
 > user: !tg school
 
+> opsdroid: 
+> 
 >           ### Occurence of value school ###
 >           amenity = school - 4232
 >           building = school - 2890
