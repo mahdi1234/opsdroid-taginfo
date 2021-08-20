@@ -9,13 +9,33 @@ class TagInfo(Skill):
 	async def hello(self, message):
 		# get user input
 		input_text = message.regex.group('input')
+		await message.respond(input_text)
 		try: 
-			# split user input into two strings (and fail otherwise)
-			osm_key,osm_value=input_text.split('=')
-			# response needs to be wrapped in <pre> tag so formatting is ok on matrix side
-			text = "<pre>\n### Occurence of " + osm_key + "=" + osm_value + " ###\n\n"
-			# when not querying wildcard
-			if (osm_value != '*'):
+
+			if re.search(r'^help$', input_text):     # any words end with ing?
+				await message.respond("<pre>Usage: '!tg key=value' or 'value'\ne.g. '!tg highway=steps' or '!tg highway=*' or 'steps'</pre>")
+
+			elif re.search(r' ', input_text):     # any words end with ing?
+				await message.respond("<pre>Usage: '!tg key=value' or 'value'\ne.g. '!tg highway=steps' or '!tg highway=*' or 'steps'</pre>")
+
+			# when querying wildcard like highway=*
+			elif re.search(r'^[a-zA-Z:_]+=\*$', input_text):     # any words end with ing?
+				osm_key,osm_value=input_text.split('=')
+				text = "<pre>\n### Occurence of " + osm_key + "=" + osm_value + " ###\n\n"
+				# get results via taginfo API
+				with urllib.request.urlopen("https://taginfo.openstreetmap.cz/api/4/key/values?key=" + osm_key + "&filter=all&lang=cz&sortname=count&sortorder=desc&page=1&rp=10") as url:
+					data = json.loads(url.read().decode())
+					for element in data['data']:
+						# taginfo API returns empty string instead of * on website, so I had to convert it back to * and str.replace() doesn't behave as I expected thus used .re
+						text += (element['value'] + " - " + str(element['count']) + "\n")
+					# return everything at once as answer to chat
+					text += "</pre>"
+					await message.respond(text)
+
+			# when querying wildcard like highway=steps
+			elif re.search(r'^[a-zA-Z:_]+=[a-zA-Z:_]+$', input_text):     # any words end with ing?
+				osm_key,osm_value=input_text.split('=')
+				text = "<pre>\n### Occurence of " + osm_key + "=" + osm_value + " ###\n\n"
 				# get results via taginfo API
 				with urllib.request.urlopen("https://taginfo.openstreetmap.cz/api/4/tag/stats?key=" + osm_key + "&value=" + osm_value) as url:
 					data = json.loads(url.read().decode())
@@ -33,19 +53,26 @@ class TagInfo(Skill):
 					# return everything at once as answer to chat
 					text += "</pre>"
 					await message.respond(text)
-			# when query wildcard like highway=*
-			else:
-				with urllib.request.urlopen("https://taginfo.openstreetmap.cz/api/4/key/values?key=" + osm_key + "&filter=all&lang=cz&sortname=count&sortorder=desc&page=1&rp=10") as url:
+
+			# when query singe word i.e. value
+			elif re.search(r'^[a-zA-Z:_]+$', input_text):     # any words end with ing?
+				osm_value=input_text
+				text = "<pre>\n### Occurence of value " + osm_value + " ###\n\n"
+				# get results via taginfo API
+				with urllib.request.urlopen("https://taginfo.openstreetmap.cz/api/4/search/by_value?query=" + osm_value + "&sortname=count_all&sortorder=desc&page=1&rp=10&format=json_pretty") as url:
 					data = json.loads(url.read().decode())
 					for element in data['data']:
 						# taginfo API returns empty string instead of * on website, so I had to convert it back to * and str.replace() doesn't behave as I expected thus used .re
-						text += (element['value'] + " - " + str(element['count']) + "\n")
+						text += (element['key'] + " = " + element['value'] + " - " + str(element['count_all']) + "\n")
 					# return everything at once as answer to chat
 					text += "</pre>"
 					await message.respond(text)
 
+			else:
+				await message.respond("<pre>Usage: '!tg key=value' or 'value'\ne.g. '!tg highway=steps' or '!tg highway=*' or 'steps'</pre>")
+
 		except:
 			# if parsing of user params fails give usage info
-			await message.respond("<pre>Usage: !tg key=value\ne.g. '!tg highway=steps' or '!tg highway=*'</pre>")
+				await message.respond("<pre>Usage: '!tg key=value' or 'value'\ne.g. '!tg highway=steps' or '!tg highway=*' or 'steps'</pre>")
 
 # https://taginfo.openstreetmap.org/api/4/search/by_value?query=supermarket&sortname=count_all&sortorder=desc&page=1&rp=10&format=json_pretty
