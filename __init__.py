@@ -3,6 +3,8 @@ import random, urllib.request, json, sys, re
 from opsdroid.matchers import match_regex
 from opsdroid.skill import Skill
 
+usage = ("<pre>Usage: '!tg key=value' or 'value'\ne.g. '!tg highway=steps' or '!tg highway=*' or 'steps'</pre>")
+
 class TagInfo(Skill):
 	# match the user input, it can be anywhere, without .* it would have to be at the start of the message which wouldn't work for my matrix-xmpp bridge
 	@match_regex(r'.*?!tg (?P<input>.*)', case_sensitive=False)
@@ -12,10 +14,10 @@ class TagInfo(Skill):
 		try: 
 
 			if re.search(r'^help$', input_text):
-				await message.respond("<pre>Usage: '!tg key=value' or 'value'\ne.g. '!tg highway=steps' or '!tg highway=*' or 'steps'</pre>")
+				await message.respond(usage)
 
 			elif re.search(r' ', input_text):
-				await message.respond("<pre>Usage: '!tg key=value' or 'value'\ne.g. '!tg highway=steps' or '!tg highway=*' or 'steps'</pre>")
+				await message.respond(usage)
 
 			# when querying wildcard like highway=*
 			elif re.search(r'^[a-zA-Z:_]+=\*$', input_text):
@@ -68,8 +70,8 @@ class TagInfo(Skill):
 					await message.respond(text)
 
 			else:
-				await message.respond("<pre>Usage: '!tg key=value' or 'value'\ne.g. '!tg highway=steps' or '!tg highway=*' or 'steps'</pre>")
+				await message.respond(usage)
 
 		except:
 			# if parsing of user params fails give usage info
-				await message.respond("<pre>Usage: '!tg key=value' or 'value'\ne.g. '!tg highway=steps' or '!tg highway=*' or 'steps'</pre>")
+				await message.respond(usage)
