@@ -13,13 +13,15 @@ class TagInfo(Skill):
 		input_text = message.regex.group('input')
 		try: 
 
+			# invoke help on help keyword
 			if re.search(r'^help$', input_text):
 				await message.respond(usage)
 
+			# catch spaces
 			elif re.search(r' ', input_text):
 				await message.respond(usage)
 
-			# when querying wildcard like highway=*
+			# querying wildcard e.g. highway=*
 			elif re.search(r'^[a-zA-Z:_]+=\*$', input_text):
 				osm_key,osm_value=input_text.split('=')
 				text = "<pre>\n### Occurence of " + osm_key + "=" + osm_value + " ###\n\n"
@@ -33,7 +35,7 @@ class TagInfo(Skill):
 					text += "</pre>"
 					await message.respond(text)
 
-			# when querying wildcard like highway=steps
+			# querying exact combination e.g. highway=steps
 			elif re.search(r'^[a-zA-Z:_]+=[a-zA-Z:_]+$', input_text):
 				osm_key,osm_value=input_text.split('=')
 				text = "<pre>\n### Occurence of " + osm_key + "=" + osm_value + " ###\n\n"
@@ -55,7 +57,7 @@ class TagInfo(Skill):
 					text += "</pre>"
 					await message.respond(text)
 
-			# when query singe word i.e. value
+			# querying value only
 			elif re.search(r'^[a-zA-Z:_]+$', input_text):
 				osm_value=input_text
 				text = "<pre>\n### Occurence of value " + osm_value + " ###\n\n"
