@@ -17,7 +17,7 @@ A skill for [opsdroid](https://github.com/opsdroid/opsdroid) to get openstreetma
 >           all - 19448
 >           nodes - 49
 >           ways - 19399
->           relations > 0
+>           relations - 0
 >
 >           ### and most common tag combinations ###
 >
